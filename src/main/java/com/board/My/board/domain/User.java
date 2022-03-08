@@ -1,5 +1,6 @@
 package com.board.My.board.domain;
 
+import com.board.My.board.dto.UserForm;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -20,4 +21,19 @@ public class User {
 
     @Column(length = 50, nullable = false)
     private String password;
+
+    /**생성자를 바로 호출하지 않는 이유는
+     * https://codinghack.tistory.com/17?category=846652
+     * 해당 링크를 참고 **/
+    public User(){}
+
+    public User(UserForm userForm){
+        this.email = userForm.getEmail();
+        this.userName = userForm.getUserName();
+        this.password = userForm.getPassword();
+    }
+
+    public static User createdUser(UserForm userForm){
+        return new User(userForm);
+    }
 }
