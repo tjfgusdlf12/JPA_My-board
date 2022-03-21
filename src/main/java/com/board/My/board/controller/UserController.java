@@ -18,8 +18,8 @@ public class UserController {
     /**UserRepository와 마찬가지로 UserService를 final필드로 등록함으로서
      * Controller --> Service --> Repository의 구조가 완성이 됐음      **/
 
-    @PostMapping("/signUp")
-    public void signUpUser(@RequestBody @Valid UserForm userForm) throws Exception{
+    @PostMapping("/signup")
+    public void signUpUser(@RequestBody @Valid UserForm userForm) throws Exception {
         userService.signUpUser(userForm);
     }
 }

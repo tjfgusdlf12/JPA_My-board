@@ -16,15 +16,15 @@ import javax.transaction.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-    private void validateDuplicateEmail(String email) throws Exception{
-        if(userRepository.existByEmail(email)){
-            throw new DuplicateEmailException();
-        }
-    }
-
     @Transactional      /**insert 쿼리가 작동할테니 @Transactional을 추가**/
     public void signUpUser(UserForm userForm) throws Exception{
         validateDuplicateEmail(userForm.getEmail());
         userRepository.save(User.createdUser(userForm));
+    }
+
+    private void validateDuplicateEmail(String email) throws Exception{
+        if(userRepository.existsByEmail(email)){
+            throw new DuplicateEmailException();
+        }
     }
 }

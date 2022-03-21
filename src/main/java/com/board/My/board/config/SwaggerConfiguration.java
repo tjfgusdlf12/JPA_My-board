@@ -14,19 +14,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private ApiInfo swaggerInfo(){
-        return new ApiInfoBuilder().title("Spring Api Documentaion")
-                .description("웹 개발시 사용되는 서버 API에 대한 연동 문서임").license("").licenseUrl("").version("1").build();
-    }
-
     /**Docket => Swagger 설정의 핵심으로 문서 객체임 API에 대한 내용 및 스펙은 컨트롤러에서 적용**/
     @Bean
     public Docket swaggerApi(){
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(swaggerInfo()).select().apis(RequestHandlerSelectors.basePackage("com.board.My.Board.controller"))
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(swaggerInfo()).select()
+                .apis(RequestHandlerSelectors.basePackage("com.board.My.board.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false);
     }
+
+    private ApiInfo swaggerInfo() {
+        return new ApiInfoBuilder().title("Spring API Documentation")
+                .description("웹 개발시 사용되는 서버 API에 대한 연동 문서입니다")
+                .license("").licenseUrl("").version("1").build();
+    }
+
     /**apiInfo => 제목 설명 등 문서 정보를 위해 호출**/
 
     /**apis => api에 대한 스펙이 작성되어 있는 패키지를 지정
